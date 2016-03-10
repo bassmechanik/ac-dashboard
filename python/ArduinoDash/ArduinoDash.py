@@ -13,10 +13,10 @@ def log_error():
     logged_errors.append(msg)
 
 def get_lib_dir():
-  if platform.architecture()[0] == '64bit':
-    return 'lib64'
-  else:
-    return 'lib'
+    if platform.architecture()[0] == '64bit':
+        return 'lib64'
+    else:
+        return 'lib'
 
 # Fix import path for sim_info ctypes
 lib_dir = 'apps/python/ArduinoDash/{}'.format(get_lib_dir())
@@ -48,9 +48,9 @@ def acUpdate(deltaT):
         value = str(round(value))
         toSend=":1" + value + ";"
         ser.write(toSend.encode())
-        gear=ac.getCarState(0,acsys.CS.TurboBoost)
+        gear=ac.getCarState(0,acsys.CS.Gear)
         gear = int(gear)
-        gear = gear #- 1
+        gear = gear - 1
         if gear == 0:
             gear = "n"
         elif gear == -1:
