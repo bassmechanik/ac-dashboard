@@ -37,7 +37,6 @@ except:
 
 ser = serial.Serial(port = 'COM3', baudrate = 10, timeout = 0)
 count = 0
-limitisset = 0
 
 def acMain(acVersion):
     # do something with serial library
@@ -45,8 +44,13 @@ def acMain(acVersion):
     ac.log("called acMain()")
     time.sleep(3)
     return "Arduino Serial"
+    
+    value =info.static.maxRpm
+    value = str(round(value))
+    toSend=":3" + value + ";"
+    ser.write(toSend.encode())
 def acUpdate(deltaT):
-    global limitisset,ser,ac,acsys,count
+    global ser,ac,acsys,count
 
     if count == 5:
         value=ac.getCarState(0,acsys.CS.RPM)
@@ -64,13 +68,6 @@ def acUpdate(deltaT):
             gear = str(gear)
         toSendGear = ":2" + gear + ";"
         ser.write(toSendGear.encode())
-        if limitisset == 0:
-            islimiteron=ac.getCarState(0,acsys.CS.IsEngineLimiterOn)
-            islimiteron = int(islimiteron)
-            if islimiteron == 1:
-                toSendLimit = ":3" + value + ";"
-                ser.write(toSendLimit.encode())
-                limitisset=1
         count = 0
     else:
         count = count + 1
