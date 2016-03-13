@@ -1,4 +1,4 @@
-# Assetto Corsa Arduino LC-Display Dashboard
+# Assetto Corsa OLED-Display Dashboard
 
 This piece of software provides the ability to connect an Arduino attached with a LC-Display-Shield to display some game relevant informations in real time. This project is currently in it's very beginning. The software needs refactoring that will probably happen within the next months. 
 
