@@ -29,7 +29,12 @@ except:
     log_error()
     raise
 
-#ser = serial.Serial(3, 9600)
+try:
+    from sim_info import info
+except:
+    log_error()
+    raise
+
 ser = serial.Serial(port = 'COM3', baudrate = 10, timeout = 0)
 count = 0
 limitisset = 0
