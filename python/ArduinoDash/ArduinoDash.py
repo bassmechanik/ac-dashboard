@@ -41,10 +41,8 @@ count = 0
 def acMain(acVersion):
     # do something with serial library
     global ser
-    ac.log("called acMain()")
     time.sleep(3)
-    return "Arduino Serial"
-    
+    # erstmal Drehzahllimiter senden
     value =info.static.maxRpm
     value = str(round(value))
     toSend=":3" + value + ";"
