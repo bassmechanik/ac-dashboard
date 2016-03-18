@@ -37,19 +37,21 @@ except:
 
 ser = serial.Serial(port = 'COM3', baudrate = 10, timeout = 0)
 count = 0
+do_once = 1
 
 def acMain(acVersion):
-    # do something with serial library
-    global ser
-    time.sleep(3)
-    # erstmal Drehzahllimiter senden
-    value =info.static.maxRpm
-    value = str(round(value))
-    toSend=":3" + value + ";"
-    ser.write(toSend.encode())
+    global ac
+    ac.log("called acMain()")
+    return "Arduino Serial"
 def acUpdate(deltaT):
-    global ser,ac,acsys,count
-
+    global do_once,ser,ac,acsys,count
+    if do_once: # in der acMain ist noch kein Shared Memory gefüllt
+        value =info.static.maxRpm
+        value = str(round(value))
+        toSend=":3" + value + ";"
+        ser.write(toSend.encode())
+        do_once=0
+        
     if count == 5:
         value=ac.getCarState(0,acsys.CS.RPM)
         value = str(round(value))
@@ -61,7 +63,7 @@ def acUpdate(deltaT):
         if gear == 0:
             gear = "n"
         elif gear == -1:
-            gear = "r"
+            gear = "R"
         else:
             gear = str(gear)
         toSendGear = ":2" + gear + ";"
