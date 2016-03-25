@@ -50,6 +50,12 @@ def acUpdate(deltaT):
         value = str(round(value))
         toSend=":3" + value + ";"
         ser.write(toSend.encode())
+        
+        #toSend=":4" + "20" + ";" #Comment out to change drawsetpoint default 20% from maxRpm
+        #ser.write(toSend.encode()) #Comment out to change drawsetpoint
+    
+        #toSend=":5" + "5" + ";"  #Comment out to change flashsetpoint default 5% from maxRpm
+        #ser.write(toSend.encode()) #Comment out to change flashsetpoint
         do_once=0
         
     if count == 5:
