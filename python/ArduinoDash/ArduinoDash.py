@@ -53,15 +53,15 @@ def acUpdate(deltaT):
         do_once=0
         
     if count == 5:
-        value=ac.getCarState(0,acsys.CS.RPM)
+        value=info.physics.rpms
         value = str(round(value))
         toSend=":1" + value + ";"
         ser.write(toSend.encode())
-        gear=ac.getCarState(0,acsys.CS.Gear)
+        gear=info.physics.gear
         gear = int(gear)
         gear = gear - 1
         if gear == 0:
-            gear = "n"
+            gear = "-"
         elif gear == -1:
             gear = "R"
         else:
