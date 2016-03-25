@@ -42,7 +42,7 @@ do_once = 1
 def acMain(acVersion):
     global ac
     ac.log("called acMain()")
-    return "Arduino Serial"
+    return "AC-Dash"
 def acUpdate(deltaT):
     global do_once,ser,ac,acsys,count
     if do_once: # in der acMain ist noch kein Shared Memory gefüllt
@@ -63,6 +63,7 @@ def acUpdate(deltaT):
         value = str(round(value))
         toSend=":1" + value + ";"
         ser.write(toSend.encode())
+        
         gear=info.physics.gear
         gear = int(gear)
         gear = gear - 1
@@ -74,6 +75,7 @@ def acUpdate(deltaT):
             gear = str(gear)
         toSendGear = ":2" + gear + ";"
         ser.write(toSendGear.encode())
+        
         count = 0
     else:
         count = count + 1
