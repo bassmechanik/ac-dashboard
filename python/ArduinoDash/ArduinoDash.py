@@ -64,6 +64,20 @@ def acUpdate(deltaT):
         toSend=":1" + value + ";"
         ser.write(toSend.encode())
         
+        wert=info.physics.tyreDirtyLevel #0=linksV 1=rechtsV 2=linksh 3=linksv 0.00..5.00
+        value=((wert[0]+wert[2])*5+9)/10
+        value=int(value)
+        value=str(value);
+        toSend=":7" + value + ";"
+        ser.write(toSend.encode())
+        
+        wert=info.physics.tyreDirtyLevel #0=linksV 1=rechtsV 2=linksh 3=linksv 0.00..5.00
+        value=((wert[1]+wert[3])*5+9)/10
+        value=int(value)
+        value=str(value);
+        toSend=":6" + value + ";"
+        ser.write(toSend.encode())
+        
         gear=info.physics.gear
         gear = int(gear)
         gear = gear - 1
