@@ -35,7 +35,10 @@ except:
     log_error()
     raise
 
-ser = serial.Serial(port = 'COM3', baudrate = 10, timeout = 0)
+from serial.tools import list_ports
+my_port_name = list(list_ports.grep("0483:3039"))[0][0]
+ser = serial.Serial(my_port_name)
+
 count = 0
 do_once = 1
 
