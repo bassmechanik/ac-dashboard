@@ -62,7 +62,7 @@ def acUpdate(deltaT):
         do_once=0
         
     if count == 5:
-        value=info.physics.rpms
+        value=ac.getCarState(0,acsys.CS.RPM)
         value = str(round(value))
         toSend=":1" + value + ";"
         ser.write(toSend.encode())
